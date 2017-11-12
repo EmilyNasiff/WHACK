@@ -1,0 +1,281 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>Vote quiz</title>
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Raleway:100,200,600,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="quizstyle.css">
+  </head>
+  <body>
+    <div id="banner">
+      <div class="content">
+    <form name="quizform">
+<div class="responses">
+      <h4>Question 1: How would you go about solving a problem?</h4>
+        <ul>
+            <div class="answers">
+          <li><label><input type="radio" name="q1" value="value1" checked> I would find everything about the topic first.</label></li>
+          <li><label><input type="radio" name="q1" value="value2"> I would break it down into parts, focusing on the details.</label></li>
+          <li><label><input type="radio" name="q1" value="value3"> I would find the source of the problem and dissect it.</label></li>
+          <li><label><input type="radio" name="q1" value="value4"> I would focus on understanding the people impacted and find out what would be the best solution for them.</label></li>
+        </div>
+        </ul>
+
+      <h4>Question 2: Which of these activities would you enjoy the most?</h4>
+        <ul>
+          <div class="answers">
+          <li><label><input type="radio" name="q2" value="value1" checked> Watching a documentary.</label></li>
+          <li><label><input type="radio" name="q2" value="value2"> Using my favorite apps.</label></li>
+          <li><label><input type="radio" name="q2" value="value3"> Taking something apart and learning about it or building something from scratch.</label></li>
+          <li><label><input type="radio" name="q2" value="value4"> Sketching and/or daydreaming.</label></li>
+        </div>
+        </ul>
+
+      <h4>Question 3: What is your favorite way to work?</h4>
+        <ul>
+          <div class="answers">
+          <li><label><input type="radio" name="q3" value="value1" checked> I liked to get really sucked into my work and do a lot of research.</label></li>
+          <li><label><input type="radio" name="q3" value="value2"> I like to plan out the task into smaller things to work on.</label></li>
+          <li><label><input type="radio" name="q3" value="value3"> I like to figure out the technical parts of the task and focus on them.</label></li>
+          <li><label><input type="radio" name="q3" value="value4"> I like to draw out my ideas and get a variety of opinions on the best solution.</label></li>
+        </div>
+        </ul>
+
+      <h4>Question 4: In a project, what is your main priority?</h4>
+        <ul>
+          <div class="answers">
+          <li><label><input type="radio" name="q4" value="value1" checked> To learn as much as possible.</label></li>
+          <li><label><input type="radio" name="q4" value="value2"> I want to execute the task in the most efficient way possible.</label></li>
+          <li><label><input type="radio" name="q4" value="value3"> I just to want to make something really cool. </label></li>
+          <li><label><input type="radio" name="q4" value="value4"> I want to create something beautiful that other people can appreciate.</label></li>
+        </div>
+          </ul>
+
+      <h4>Question 5: What do you want your work to say about you?</h4>
+        <ul>
+          <div class="answers">
+          <li><label><input type="radio" name="q5" value="value1" checked> I want my work to say I am an expert in a field who uses that expertise to improve lives.</label></li>
+          <li><label><input type="radio" name="q5" value="value2"> I want my work to say I can create a great solution to any problem.</label></li>
+          <li><label><input type="radio" name="q5" value="value3"> I want the thing I create to work efficiently and make work easier.</label></li>
+          <li><label><input type="radio" name="q5" value="value4"> I want my work to say that I care about what people need and can help them get what they need.</label></li>
+        </div>
+
+      </div>
+        </ul>
+        <div class="button">
+<button type="submit">Submit</button>
+</div>
+      </div>
+    </div>
+
+
+
+      <div id="result_div" style="display:none;">
+      <img id="result_image" alt="">
+      <p id="result_text"></p>
+      <p>BBCode:<br>
+      <textarea rows="3" cols="30" id="result_bbcode"></textarea></p>
+
+      <p>HTML:<br>
+      <textarea rows="3" cols="30" id="result_html"></textarea></p>
+      </div>
+    </form>
+    <script type="text/javascript">
+    (function() {
+        /*************************************************************************
+        This should be the full address to your quiz, in order for the result
+        codes to link to it.
+
+        *************************************************************************/
+        var QUIZ_URL = "http://www.example.com/a_quiz.html";
+
+        /*************************************************************************
+        This should be the full address to whatever folder on your website
+        directly contains your result images, ending in a forward slash.
+
+        *************************************************************************/
+        var RESULTS_FOLDER_URL = "http://www.example.com/a_folder/";
+
+        /*************************************************************************
+        Below, enter the possible final results for your quiz.
+
+        The format should be relatively self-explanatory, but here's a rundown
+        anyway:
+
+        Where it says "value1", "value2", etc., enter the name you will put into
+        the VALUE attribute of that result's answers. For example, if Alakazam is
+        one of the possible results in your quiz, you could enter "alakazam". This
+        value will not be displayed to your visitor, so it does not need to be
+        capitalized or punctuated. It should not contain quotation marks,
+        ampersands or backslashes (", & or \).
+
+        Where it says "Result 1", "Result 2", etc., enter the full name of the
+        result, such as "Alakazam". Where it says "result_1.jpg", "result_2.jpg",
+        etc., enter the filename of the image the user should be presented with if
+        they get that result. Where it says "Text for the first result", "Text for
+        the second result", etc., enter the text the user should be presented with
+        if they get that result. (If you do not want them to get any text with
+        their result, you can erase those lines altogether.) Remember to enclose
+        these values in quotes.
+
+        It is also possible to leave out the name, image and text and instead add
+        a link property, like so:
+
+        RESULTS["alakazam"] = {
+            link: "/quiz/alakazam.html"
+        };
+
+        If you do this, then the user will be redirected to the link for their
+        result when they finish the quiz. The link, like a regular HTML link, can
+        be a full URL or an absolute or relative path on your server.
+
+        You can have as many possible results as you like - four is just the
+        default.
+
+        If you want to include "intermediate" results - special results for
+        ties between two or more regular results - those should be entered with
+        an ampersand between the tied values:
+
+        RESULTS["value1&value2"] = {
+            name: "Result 1/2 tie",
+            image: "result_1_2.jpg",
+            text: "Text for a tie between the first and second result"
+        };
+
+        This is completely optional; if you don't include an intermediate result,
+        then the result listed first here will simply take precedence. The order
+        of the values in a tiebreaker result should also match the order given
+        here (that is, "value1&value2" works when value1 comes before value2,
+        while "value2&value1" would not).
+
+        *************************************************************************/
+
+        var RESULTS = {};
+
+        RESULTS["value1"] = {
+            link: "index1.html"
+        };
+
+
+        RESULTS["value2"] = {
+            link: "index2.html"
+        };
+
+        RESULTS["value3"] = {
+            link: "index3.html"
+        };
+
+        RESULTS["value4"] = {
+            link:"index4.html"
+        };
+
+
+        /*************************************************************************
+        If for some reason you need to give your form a different name attribute
+        than "quizform", enter it here. Otherwise, leave this alone.
+
+        *************************************************************************/
+        var FORM_NAME = 'quizform';
+
+        /*************************************************************************
+        DO NOT EDIT ANYTHING BELOW THIS POINT
+
+        *************************************************************************/
+
+        var form = document.forms[FORM_NAME];
+        var form_elements = document.forms[FORM_NAME].elements;
+        var form_element;
+        var result_div = document.getElementById("result_div");
+        var result_image = document.getElementById("result_image");
+        var result_text = document.getElementById("result_text");
+        var result_bbcode = document.getElementById("result_bbcode");
+        var result_html = document.getElementById("result_html");
+
+        // Validate the quiz form to prevent common issues
+        for (var i = 0; i < form_elements.length; i++) {
+            form_element = form_elements[i];
+            if (form_element.type === "radio") {
+                if (form_element.value.indexOf('&') !== -1) {
+                    alert("Your quiz form has an answer with an ampersand in the value (" + form_element.value + "). This will cause problems. Please change this value.");
+                }
+                else if (!(form_element.value in RESULTS)) {
+                    alert("Your quiz form has an answer with the value " + form_element.value + " but there is no result corresponding to this value. You have probably made a typo somewhere.");
+                }
+            }
+        }
+
+        form.onsubmit = function() {
+            var answers = {};
+            var results = [];
+            var joined_results;
+            var result;
+            var form_element;
+
+            for (var value in RESULTS) {
+                if (value.indexOf('&') === -1) {
+                    // Not a joint result
+                    answers[value] = 0;
+                }
+            }
+
+            for (var i = 0; i < form_elements.length; i++) {
+                form_element = form_elements[i];
+                if ((form_element.type === "radio" || form_element.type === "checkbox") && form_element.checked) {
+                    answers[form_element.value]++;
+                }
+            }
+
+            for (var value in answers) {
+                if (results.length === 0 || answers[value] > answers[results[0]]) {
+                    results = [value];
+                }
+                else if (answers[value] === answers[results[0]]) {
+                    results.push(value);
+                }
+            }
+
+            while (results.length > 0) {
+                joined_results = results.join('&');
+                if (joined_results in RESULTS) {
+                    result = RESULTS[joined_results];
+                    break;
+                }
+                else {
+                    // No joint result - remove the last element and see if
+                    // there's a result for that.
+                    results.pop();
+                }
+            }
+
+            if (result.link) {
+                window.location = result.link;
+                return false;
+            }
+
+            if (result_image) {
+                result_image.src = RESULTS_FOLDER_URL + result.image;
+                result_image.setAttribute('alt', result.name);
+                if (result.text) result_image.title = result.text;
+            }
+            if (result_text && result.text) {
+                result_text.innerHTML = result.text;
+            }
+            if (result_bbcode) {
+                result_bbcode.innerHTML = '[url=' + QUIZ_URL + '][img]' + RESULTS_FOLDER_URL + result.image + '[/img][/url]';
+            }
+            if (result_html) {
+                result_html.innerHTML = '<a href="' + QUIZ_URL + '"><img src="' + RESULTS_FOLDER_URL + result.image + '" alt="' + result.name + '" title="' + result.text + '"></a>';
+            }
+            result_div.style.display = 'block';
+            return false;
+        };
+    })();
+
+    /*************************************************************************
+    Free quiz script from The Cave of Dragonflies:
+    http://www.dragonflycave.com/free-quiz-scripts
+    *************************************************************************/
+
+    </script>
+
+  </body>
+</html>
